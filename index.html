@@ -9,7 +9,8 @@
 <meta property="og:title" content="SGV Importación">
 <meta property="og:description" content="Importamos productos y los vendemos en Chile y Uruguay.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230039A6'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='Arial,sans-serif' font-weight='800' font-size='18' fill='white'%3ES%3C/text%3E%3Crect y='26' width='16' height='6' fill='%23D52B1E'/%3E%3Crect x='16' y='26' width='16' height='6' fill='%23FCD116'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400&display=swap">
@@ -36,6 +37,8 @@
   --estrella-vacia:#A9B4C8;
   --err:#B3261E;
   --shadow:rgba(11,27,63,.2);
+  --logo-plate:transparent;
+  --logo-pad:0;
 
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --ui:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -46,13 +49,13 @@
   :root:not([data-theme="light"]){
     --paper:#070D1C; --sheet:#101A30; --field:#0B1428; --ink:#E8EEF9; --muted:#9CABC4; --rule:#26354F;
     --azul:#8FB0FF; --on-azul:#08122B; --marino:#0A1B45; --estrella:#FCD116; --estrella-vacia:#4A5B7B;
-    --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; color-scheme:dark;
+    --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; --logo-plate:#fff; --logo-pad:.3rem .6rem; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --paper:#070D1C; --sheet:#101A30; --field:#0B1428; --ink:#E8EEF9; --muted:#9CABC4; --rule:#26354F;
   --azul:#8FB0FF; --on-azul:#08122B; --marino:#0A1B45; --estrella:#FCD116; --estrella-vacia:#4A5B7B;
-  --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; color-scheme:dark;
+  --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; --logo-plate:#fff; --logo-pad:.3rem .6rem; color-scheme:dark;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -72,16 +75,15 @@ img{max-width:100%}
 /* Barra superior: franja azul, rojo y oro sobre la marca */
 .top{position:sticky;top:0;z-index:10;background:var(--paper);background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .top::before,.pie::before{content:"";display:block;height:4px;background:linear-gradient(90deg,var(--cl-azul) 0 45%,var(--cl-rojo) 45% 60%,var(--uy-oro) 60% 100%)}
-.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1rem;min-height:3.75rem}
-.marca{display:inline-flex;align-items:baseline;gap:.5rem;text-decoration:none;color:var(--ink)}
-.marca b{font:800 1.375rem/1 var(--display);font-stretch:125%;letter-spacing:.02em}
-.marca span{font:500 .9375rem/1 var(--ui);color:var(--muted)}
+.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1rem;padding-block:.5rem}
+.marca{display:inline-flex;align-items:center;text-decoration:none}
+.logo{display:block;height:4rem;width:auto;background:var(--logo-plate);padding:var(--logo-pad);border-radius:6px;box-sizing:content-box}
 .nav{display:flex;align-items:center;gap:clamp(.9rem,3vw,2rem)}
 .nav a{color:var(--ink);text-decoration:none;font:600 .9375rem/1 var(--ui);padding-block:.55rem;border-bottom:2px solid transparent}
 .nav a:hover{border-bottom-color:var(--azul)}
 .nav a.nav-cta{background:var(--azul);color:var(--on-azul);padding:.65rem 1rem;border-radius:4px;border-bottom-color:transparent}
 .nav a.nav-cta:hover{filter:brightness(1.1)}
-@media (max-width:520px){.marca span{display:none}}
+@media (max-width:520px){.logo{height:3rem}}
 
 /* Botones */
 .btn{display:inline-flex;align-items:center;justify-content:center;font:650 1rem/1 var(--ui);padding:.95rem 1.35rem;border-radius:4px;text-decoration:none;border:1.5px solid var(--azul);cursor:pointer;transition:filter .15s,background-color .15s}
@@ -97,7 +99,7 @@ img{max-width:100%}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
   background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.055) 0 1px,transparent 1px 10px),repeating-linear-gradient(-45deg,rgba(255,255,255,.055) 0 1px,transparent 1px 10px);
   -webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 80%);mask-image:linear-gradient(100deg,transparent 25%,#000 80%)}
-.hero :focus-visible,.pie :focus-visible{outline-color:var(--uy-oro)}
+.hero :focus-visible{outline-color:var(--uy-oro)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2.5rem,6vw,5rem);align-items:center;padding-block:clamp(3rem,8vw,6.5rem) clamp(4.5rem,9vw,7.5rem)}
 .hero h1{color:#fff;font-size:clamp(2.2rem,1.2rem + 4vw,3.9rem);font-weight:780;font-stretch:116%;line-height:1.03;letter-spacing:-.012em;max-width:16ch}
 .intro{margin-top:1.4rem;font-family:var(--text);font-size:clamp(1.0625rem,1rem + .35vw,1.25rem);line-height:1.6;color:#C9D5EE;max-width:46ch}
@@ -192,15 +194,12 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .estado{border-left:3px solid var(--azul);background:color-mix(in srgb,var(--azul) 8%,transparent);padding:.8rem .95rem;font-size:.9375rem;line-height:1.5;border-radius:0 4px 4px 0}
 
 /* Pie */
-.pie{background:var(--marino);color:#C9D5EE}
+.pie{background:var(--sheet);color:var(--muted);border-top:1px solid var(--rule)}
 .pie-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;padding-block:2rem 2.5rem;font-size:.875rem}
-.pie .marca{color:#fff}
-.pie .marca span{color:#C9D5EE}
-.pie .marca b{font-size:1.125rem}
+.logo-pie{height:4.5rem}
 .pie-nav{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
-.pie a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
-.pie a.marca{border-bottom:0}
-.pie a:hover{border-bottom-color:var(--uy-oro)}
+.pie-nav a{color:var(--ink);text-decoration:none;font-weight:600;border-bottom:1px solid var(--rule)}
+.pie-nav a:hover{border-bottom-color:var(--azul)}
 .pie-legal{display:grid;gap:.15rem;text-align:right}
 @media (max-width:640px){.pie-legal{text-align:left}}
 
@@ -217,7 +216,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 
 <header class="top">
   <div class="wrap bar">
-    <a class="marca" href="#inicio" aria-label="SGV Importación, inicio"><b>SGV</b><span>Importación</span></a>
+    <a class="marca" href="#inicio" aria-label="Inicio"><img class="logo" src="assets/logo.webp" width="640" height="522" alt="SGV Importaciones"></a>
     <nav class="nav" aria-label="Secciones">
       <a href="#historia">Historia</a>
       <a href="#resenas">Reseñas</a>
@@ -413,7 +412,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 
 <footer class="pie">
   <div class="wrap pie-bar">
-    <a class="marca" href="#inicio" aria-label="SGV Importación, volver al inicio"><b>SGV</b><span>Importación</span></a>
+    <a class="marca" href="#inicio" aria-label="Volver al inicio"><img class="logo logo-pie" src="assets/logo.webp" width="640" height="522" alt="SGV Importaciones" loading="lazy"></a>
     <nav class="pie-nav" aria-label="Pie de página">
       <a href="#historia">Historia</a>
       <a href="#resenas">Reseñas</a>
