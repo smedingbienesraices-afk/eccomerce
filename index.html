@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>SGV Importaciones | Importamos y vendemos en Chile y Uruguay</title>
 <meta name="description" content="SGV Importaciones es una sociedad con base en Chile y Uruguay. Seleccionamos productos, gestionamos su importación y los vendemos en ambos mercados.">
-<meta name="theme-color" content="#F3F5F9" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#070D1C" media="(prefers-color-scheme: dark)">
-<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#050A18">
+<meta name="color-scheme" content="dark">
 <meta property="og:title" content="SGV Importaciones">
 <meta property="og:description" content="Importamos productos y los vendemos en Chile y Uruguay.">
 <meta property="og:type" content="website">
@@ -15,218 +14,233 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@85..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400..700&family=Unbounded:wght@500..700&display=swap">
 <style>
-/* Concepto: documento de importación sellado.
-   Portada marino con trama de papel de seguridad y la ficha de empresa como documento con sello;
-   el resto de la página es sobrio. Azul y rojo de Chile, oro del Sol de Uruguay.
-   Cada sección es una columna de título + una de contenido (5fr / 7fr) que se apila en móvil. */
+/* Concepto: tablero de control de una ruta comercial.
+   Un globo de puntos centrado en Sudamérica (eco del globo del logo) con la ruta Santiago a Montevideo,
+   paneles de vidrio y datos reales como coordenadas. Azul y rojo de Chile, oro de Uruguay.
+   Una sola secuencia de movimiento al cargar; el resto responde a lo que hace la persona. */
 :root{
-  --cl-azul:#0039A6;
+  --cl-azul:#2F63D8;
   --cl-rojo:#D52B1E;
-  --uy-oro:#FCD116;
+  --oro:#FCD116;
 
-  --paper:#F3F5F9;
-  --sheet:#FFFFFF;
-  --field:#F7F9FC;
-  --ink:#0B1B3F;
-  --muted:#52607A;
-  --rule:#D3DAE6;
-  --azul:#0039A6;
-  --on-azul:#FFFFFF;
-  --marino:#0B1F4D;
-  --estrella:#B07A00;
-  --estrella-vacia:#A9B4C8;
-  --err:#B3261E;
-  --shadow:rgba(11,27,63,.2);
+  --void:#050A18;
+  --abismo:#030612;
+  --panel:rgba(255,255,255,.05);
+  --vidrio:rgba(10,19,48,.66);
+  --anillo:rgba(143,176,255,.22);
+  --ink:#EAF0FF;
+  --texto:#C9D5EE;
+  --muted:#9FB0D0;
+  --azul:#8FB0FF;
+  --rojo:#FF6050;
   --on-oro:#0B1B3F;
-  --on-marino:#FFFFFF;
-  --on-marino-2:#C9D5EE;
-  --ease-out:cubic-bezier(0.23,1,0.32,1);
-  --logo-plate:transparent;
-  --logo-pad:0;
+  --err:#FF8A80;
+  --campo:rgba(3,6,18,.65);
+  --estrella-vacia:#6A7DA6;
 
-  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --ui:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --text:"Source Serif 4",Georgia,"Times New Roman",serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#070D1C; --sheet:#101A30; --field:#0B1428; --ink:#E8EEF9; --muted:#9CABC4; --rule:#26354F;
-    --azul:#8FB0FF; --on-azul:#08122B; --marino:#0A1B45; --estrella:#FCD116; --estrella-vacia:#4A5B7B;
-    --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; --logo-plate:#fff; --logo-pad:.3rem .6rem; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#070D1C; --sheet:#101A30; --field:#0B1428; --ink:#E8EEF9; --muted:#9CABC4; --rule:#26354F;
-  --azul:#8FB0FF; --on-azul:#08122B; --marino:#0A1B45; --estrella:#FCD116; --estrella-vacia:#4A5B7B;
-  --err:#FF8A80; --shadow:rgba(0,0,0,.55); --cl-azul:#2F63D8; --logo-plate:#fff; --logo-pad:.3rem .6rem; color-scheme:dark;
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out:cubic-bezier(0.77,0,0.175,1);
+
+  --display:"Unbounded","Sora",system-ui,sans-serif;
+  --ui:"Sora",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:6rem;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{background:var(--void);scroll-behavior:smooth;scroll-padding-top:6rem;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--void);color:var(--ink);font:400 1rem/1.65 var(--ui);-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:var(--azul)}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;color:var(--ink)}
+h1,h2,h3,h4{margin:0;color:var(--ink);text-wrap:balance}
+h1,h2{font-family:var(--display);font-weight:600;overflow-wrap:anywhere}
 p{margin:0}
 img{max-width:100%}
 [hidden]:not([hidden=until-found i]){display:none!important}
-:focus-visible{outline:2px solid var(--azul);outline-offset:3px;border-radius:2px}
+:focus-visible{outline:2px solid var(--azul);outline-offset:3px;border-radius:3px}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .wrap{max-width:72rem;margin-inline:auto;padding-inline:max(clamp(16px,4vw,40px),env(safe-area-inset-left,0px)) max(clamp(16px,4vw,40px),env(safe-area-inset-right,0px))}
-.skip{position:absolute;left:1rem;top:-4rem;z-index:20;background:var(--azul);color:var(--on-azul);padding:.7rem 1rem;border-radius:4px;font-weight:650;text-decoration:none}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:20;background:var(--oro);color:var(--on-oro);padding:.7rem 1rem;border-radius:10px;font-weight:600;text-decoration:none}
 .skip:focus{top:1rem}
 a,button,label,select{touch-action:manipulation}
 .btn,.nav a,.pie-nav a,.estrellas label,.skip{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 
-/* Barra superior: franja azul, rojo y oro sobre la marca */
-.top{position:sticky;top:0;z-index:10;padding-top:env(safe-area-inset-top,0px);background:var(--paper);background:color-mix(in srgb,var(--paper) 92%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.top::before,.pie::before{content:"";display:block;height:4px;background:linear-gradient(90deg,var(--cl-azul) 0 45%,var(--cl-rojo) 45% 60%,var(--uy-oro) 60% 100%)}
-.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem 1rem;padding-block:.5rem}
+/* Barra superior: vidrio, con la franja azul, rojo y oro */
+.top{position:sticky;top:0;z-index:10;padding-top:env(safe-area-inset-top,0px);background:rgba(5,10,24,.72);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);box-shadow:0 1px 0 var(--anillo)}
+.top::before,.pie::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--cl-azul) 0 45%,var(--cl-rojo) 45% 60%,var(--oro) 60% 100%)}
+.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.25rem 1rem;padding-block:.5rem}
 .marca{display:inline-flex;align-items:center;text-decoration:none}
-.logo{display:block;height:4rem;width:auto;background:var(--logo-plate);padding:var(--logo-pad);border-radius:6px;box-sizing:content-box}
-.nav{display:flex;align-items:center;gap:clamp(.25rem,2vw,1rem)}
-.nav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.6rem;color:var(--ink);font:600 .9375rem/1 var(--ui);text-decoration:underline 2px transparent;text-underline-offset:.5em;transition:text-decoration-color .15s}
-.nav a[aria-current]{text-decoration-color:var(--azul)}
-.nav a.nav-cta{background:var(--azul);color:var(--on-azul);padding-inline:1.1rem;border-radius:4px;text-decoration:none;transition:transform 160ms var(--ease-out),filter .15s ease}
+.logo{display:block;height:56px;width:auto}
+.nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:0 clamp(.25rem,1.5vw,.75rem)}
+.nav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.7rem;color:var(--ink);font:500 .9375rem/1 var(--ui);text-decoration:underline 2px transparent;text-underline-offset:.5em;transition:text-decoration-color .15s}
+.nav a[aria-current]{text-decoration-color:var(--oro)}
+.nav a.nav-cta{background:var(--oro);color:var(--on-oro);padding-inline:1.1rem;border-radius:10px;font-weight:600;text-decoration:none;transition:transform 160ms var(--ease-out),filter .15s ease}
 .nav a.nav-cta:active{transform:scale(.97)}
-@media (max-width:560px){.logo{height:3rem}}
+@media (max-width:560px){
+  .logo{height:44px}
+  .nav a{padding-inline:.45rem;font-size:.875rem}
+  .nav a.nav-cta{padding-inline:.8rem}
+}
+@media (max-height:520px){.top{position:static}}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;font:650 1rem/1 var(--ui);padding:.95rem 1.35rem;border-radius:4px;text-decoration:none;border:1.5px solid var(--azul);cursor:pointer;transition:transform 160ms var(--ease-out),filter .15s ease,background-color .15s ease}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.8rem 1.4rem;border:0;border-radius:10px;font:600 1rem/1.2 var(--ui);text-align:center;text-decoration:none;cursor:pointer;transition:transform 160ms var(--ease-out),filter .15s ease,background-color .15s ease}
 .btn:active{transform:scale(.97)}
-.btn-primario{background:var(--azul);color:var(--on-azul)}
-.btn-oro{background:var(--uy-oro);border-color:var(--uy-oro);color:var(--on-oro)}
-.btn-claro{background:transparent;border-color:rgba(255,255,255,.55);color:var(--on-marino)}
+.btn-oro{background:var(--oro);color:var(--on-oro);box-shadow:0 0 0 1px rgba(252,209,22,.55),0 10px 30px -12px rgba(252,209,22,.6)}
+.btn-claro{background:var(--panel);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(143,176,255,.4)}
 @media (hover:hover) and (pointer:fine){
-  .btn-primario:hover{filter:brightness(1.1)}
-  .btn-oro:hover{filter:brightness(1.06)}
-  .btn-claro:hover{background:rgba(255,255,255,.1);border-color:#fff}
+  .btn-oro:hover{filter:brightness(1.07)}
+  .btn-claro:hover{background:rgba(255,255,255,.11)}
   .nav a:hover{text-decoration-color:var(--azul)}
-  .nav a.nav-cta:hover{filter:brightness(1.1)}
+  .nav a.nav-cta:hover{filter:brightness(1.07)}
   .pie-nav a:hover{text-decoration-color:var(--azul)}
-  .estrellas label:hover,.estrellas label:hover ~ label{color:var(--estrella)}
+  .estrellas label:hover,.estrellas label:hover ~ label{color:var(--oro)}
 }
 
 /* Portada */
-.hero{position:relative;isolation:isolate;background:var(--marino);color:var(--on-marino);overflow:hidden}
+.hero{position:relative;isolation:isolate;overflow:clip;background:radial-gradient(55rem 38rem at 76% 42%,rgba(47,99,216,.26),transparent 62%),var(--void)}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.055) 0 1px,transparent 1px 10px),repeating-linear-gradient(-45deg,rgba(255,255,255,.055) 0 1px,transparent 1px 10px);
-  -webkit-mask-image:linear-gradient(100deg,transparent 25%,#000 80%);mask-image:linear-gradient(100deg,transparent 25%,#000 80%)}
-.hero :focus-visible{outline-color:var(--uy-oro)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2.5rem,6vw,5rem);align-items:center;padding-block:clamp(3rem,8vw,6.5rem) clamp(4.5rem,9vw,7.5rem)}
-.hero h1{color:var(--on-marino);font-size:clamp(2.2rem,1.2rem + 4vw,3.9rem);font-weight:780;font-stretch:116%;line-height:1.03;letter-spacing:-.012em;max-width:16ch}
-.intro{margin-top:1.4rem;font-family:var(--text);font-size:clamp(1.0625rem,1rem + .35vw,1.25rem);line-height:1.6;color:var(--on-marino-2);max-width:46ch}
-.acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
-@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.ficha{max-width:30rem}}
+  background-image:linear-gradient(rgba(143,176,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(143,176,255,.07) 1px,transparent 1px);background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 85% at 72% 45%,#000 25%,transparent 78%);mask-image:radial-gradient(ellipse 70% 85% at 72% 45%,#000 25%,transparent 78%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(2.5rem,6vw,5rem) clamp(5.5rem,9vw,7.5rem)}
+.hero h1{font-size:min(clamp(1.7rem,1rem + 3.3vw,3.2rem),11vw);line-height:1.12;letter-spacing:-.015em;max-width:17ch}
+.intro{margin-top:1.4rem;font-size:clamp(1rem,.95rem + .35vw,1.15rem);line-height:1.7;color:var(--texto);max-width:46ch}
+.acciones{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr}.globo-bloque{max-width:32rem;margin-inline:auto;width:100%}}
 
-/* Ficha de empresa: siempre papel claro, con sello. Redefine sus propios colores para no oscurecerse en modo oscuro. */
-.ficha{--sheet:#FFFFFF;--ink:#0B1B3F;--muted:#52607A;--rule:#D3DAE6;--azul:#0039A6;--sello:#D52B1E;
-  position:relative;background:var(--sheet);color:var(--ink);border-radius:3px;box-shadow:0 28px 50px -24px rgba(0,0,0,.65);padding:1.25rem 1.35rem 5rem}
-.ficha-top{display:flex;justify-content:space-between;gap:1rem;padding-bottom:.75rem;border-bottom:2px solid var(--ink);font:650 .875rem/1.2 var(--ui);font-stretch:85%;letter-spacing:.04em}
-.ficha dl{margin:0}
-.ficha dl div{display:grid;grid-template-columns:6.25rem minmax(0,1fr);gap:1rem;padding-block:.8rem;border-bottom:1px solid var(--rule)}
-.ficha dl div:last-child{border-bottom:0}
-.ficha dt{font:600 .875rem/1.4 var(--ui);font-stretch:85%;letter-spacing:.02em;color:var(--muted)}
-.ficha dd{margin:0;font:500 1rem/1.4 var(--ui);min-width:0}
-.ficha :focus-visible{outline-color:var(--azul)}
-.sello{position:absolute;right:.75rem;bottom:-2.25rem;width:clamp(104px,10vw,120px);height:auto;color:var(--sello);opacity:.95;transform:rotate(-14deg);pointer-events:none;animation:estampar .5s .2s var(--ease-out) backwards}
-@keyframes estampar{0%{transform:rotate(-22deg) scale(1.18);opacity:0}30%{opacity:.4}70%{transform:rotate(-13deg) scale(.97);opacity:.97}100%{transform:rotate(-14deg) scale(1);opacity:.95}}
+/* Globo y ruta */
+.globo-bloque{display:grid;gap:1rem;min-width:0}
+.globo{position:relative;width:min(100%,540px);aspect-ratio:1;margin-inline:auto}
+.globo > img,.globo > svg{position:absolute;inset:0;width:100%;height:100%}
+.ruta{overflow:visible}
+.arco{filter:drop-shadow(0 0 5px rgba(255,96,80,.55))}
+.nodo{transform-box:fill-box;transform-origin:center}
+.nodo-cl{color:var(--rojo);filter:drop-shadow(0 0 4px currentColor)}
+.nodo-uy{color:var(--oro);filter:drop-shadow(0 0 4px currentColor)}
+.ping{opacity:0;transform-box:fill-box;transform-origin:center}
+.coords{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.75rem}
+.coords div{display:grid;gap:.1rem;padding:.7rem .95rem;background:var(--panel);border-radius:12px;box-shadow:0 0 0 1px var(--anillo)}
+.coords dt{display:flex;align-items:center;gap:.55rem;font-size:.9375rem;font-weight:600}
+.coords dd{margin:0;padding-left:1.15rem;font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.punto{flex:none;width:.6rem;height:.6rem;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.punto-cl{--c:var(--rojo)}
+.punto-uy{--c:var(--oro)}
+
+/* Datos de la empresa: panel de vidrio que cruza el borde de la portada */
+.datos{position:relative;z-index:2;margin-top:-3.5rem}
+.datos dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr));gap:1rem 1.5rem;padding:1.25rem 1.5rem;background:var(--vidrio);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-radius:16px;box-shadow:0 0 0 1px var(--anillo),0 30px 70px -30px rgba(0,0,0,.9)}
+.datos dt{font-size:.875rem;color:var(--muted)}
+.datos dd{margin:.15rem 0 0;font-weight:600;overflow-wrap:anywhere}
 
 /* Secciones */
-.seccion{border-top:1px solid var(--rule);padding-block:clamp(3.5rem,8vw,6.5rem)}
-.hero + .seccion{border-top:0}
+.seccion{padding-block:clamp(3.5rem,8vw,6rem)}
+.seccion + .seccion{border-top:1px solid rgba(143,176,255,.12)}
 .seccion-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4.5rem);align-items:start}
 @media (max-width:860px){.seccion-grid{grid-template-columns:1fr}}
-.seccion-head{display:grid;gap:.9rem;align-content:start;min-width:0}
-.seccion h2{font-size:clamp(1.85rem,1.2rem + 2.2vw,2.6rem);font-weight:760;font-stretch:116%;line-height:1.05}
+.seccion-head{display:grid;grid-template-columns:minmax(0,1fr);gap:.9rem;align-content:start;min-width:0}
+.seccion h2{font-size:min(clamp(1.45rem,1rem + 1.7vw,2.1rem),9vw);line-height:1.15;letter-spacing:-.01em}
 .seccion-head p{color:var(--muted);max-width:40ch}
 
 /* Historia */
 .relato{display:grid;gap:1.25rem;max-width:62ch;min-width:0}
-.relato p{font-family:var(--text);font-size:1.125rem;line-height:1.72}
-.relato .lead{font-size:clamp(1.25rem,1.1rem + .6vw,1.5rem);line-height:1.5}
-.sub{margin-top:1.75rem;font-size:1.125rem;font-weight:700;font-stretch:108%}
+.relato p{font-size:1.0625rem;line-height:1.75;color:var(--texto)}
+.relato .lead{font-size:clamp(1.2rem,1.1rem + .5vw,1.4rem);line-height:1.55;color:var(--ink)}
+.sub{margin-top:1.75rem;font:600 1.0625rem/1.3 var(--ui)}
 .relato .sub + *{margin-top:-.25rem}
 
-.monedas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
-.monedas li{background:var(--sheet);border:1px solid var(--rule);border-radius:3px;overflow:hidden;padding:0 1rem 1rem;min-width:0}
-.monedas li::before{content:"";display:block;height:5px;margin:0 -1rem 1rem;background:var(--barra)}
+.monedas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:1rem}
+.monedas li{position:relative;overflow:hidden;min-width:0;padding:1.25rem 1rem 1rem;background:var(--panel);border-radius:12px;box-shadow:0 0 0 1px var(--anillo)}
+.monedas li::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--barra)}
 .moneda-cl{--barra:linear-gradient(90deg,var(--cl-azul) 0 62%,var(--cl-rojo) 62% 100%)}
-.moneda-uy{--barra:var(--uy-oro)}
+.moneda-uy{--barra:var(--oro)}
 .moneda-usd{--barra:var(--ink)}
-.monedas b{display:block;font:800 1.75rem/1 var(--display);font-stretch:116%;letter-spacing:.01em}
-.monedas span{display:block;margin-top:.45rem;font:500 .9375rem/1.35 var(--ui);color:var(--muted)}
-@media (max-width:640px){.monedas{grid-template-columns:1fr}}
+.monedas b{display:block;font:700 1.45rem/1 var(--display);letter-spacing:.01em;overflow-wrap:anywhere}
+.monedas span{display:block;margin-top:.6rem;font-size:.9375rem;line-height:1.45;color:var(--muted)}
 
 .pasos{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;counter-reset:paso}
-.pasos li{counter-increment:paso;position:relative;padding-top:2.6rem;min-width:0}
-.pasos li::before{content:"";position:absolute;top:.9rem;left:0;right:-1.5rem;height:2px;background:var(--rule)}
+.pasos li{counter-increment:paso;position:relative;padding-top:2.8rem;min-width:0}
+.pasos li:nth-child(1){--nodo:var(--cl-azul);--sig:var(--cl-rojo);--on-nodo:#fff}
+.pasos li:nth-child(2){--nodo:var(--cl-rojo);--sig:var(--oro);--on-nodo:#fff}
+.pasos li:nth-child(3){--nodo:var(--oro);--sig:transparent;--on-nodo:var(--on-oro)}
+.pasos li::before{content:"";position:absolute;top:.95rem;left:0;right:-1.5rem;height:2px;background:linear-gradient(90deg,var(--nodo),var(--sig))}
 .pasos li:last-child::before{right:0}
-.pasos li::after{content:counter(paso);position:absolute;top:0;left:0;display:grid;place-items:center;width:1.85rem;height:1.85rem;border-radius:50%;background:var(--azul);color:var(--on-azul);font:800 .875rem/1 var(--display)}
-.pasos h4{margin:0;font:700 1.0625rem/1.3 var(--display);font-stretch:105%}
-.pasos p{margin-top:.4rem;font-family:var(--ui);font-size:.96875rem;line-height:1.55;color:var(--muted)}
+.pasos li::after{content:counter(paso);position:absolute;top:0;left:0;display:grid;place-items:center;width:1.95rem;height:1.95rem;border-radius:50%;background:var(--nodo);color:var(--on-nodo);font:700 .875rem/1 var(--ui);box-shadow:0 0 0 4px color-mix(in srgb,var(--nodo) 25%,transparent),0 0 18px color-mix(in srgb,var(--nodo) 55%,transparent)}
+.pasos h4{margin:0;font:600 1.0625rem/1.3 var(--ui);overflow-wrap:anywhere}
+.pasos p{margin-top:.4rem;font-size:.96875rem;line-height:1.6;color:var(--muted);overflow-wrap:anywhere}
 @media (max-width:640px){
   .pasos{grid-template-columns:1fr;gap:1.6rem}
-  .pasos li{padding:0 0 0 2.9rem}
-  .pasos li::before{top:2.1rem;bottom:-1.6rem;left:.9rem;right:auto;width:2px;height:auto}
+  .pasos li{padding:0 0 0 3rem}
+  .pasos li::before{top:2.2rem;bottom:-1.6rem;left:.95rem;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--nodo),var(--sig))}
   .pasos li:last-child::before{display:none}
 }
 
 /* Reseñas */
-.vacio{border:1.5px dashed var(--rule);border-radius:6px;padding:clamp(1.4rem,4vw,2rem);display:grid;gap:.55rem;margin-top:.6rem}
-.vacio .muestra{font-size:1.35rem;letter-spacing:.18em;color:var(--estrella);line-height:1}
-.vacio h3{font-size:1.15rem;font-weight:700;font-stretch:105%}
+.vacio{border:1.5px dashed rgba(143,176,255,.32);border-radius:14px;padding:clamp(1.4rem,4vw,2rem);display:grid;gap:.55rem;margin-top:.6rem}
+.vacio .muestra{font-size:1.35rem;letter-spacing:.18em;color:var(--oro);line-height:1;overflow-wrap:anywhere}
+.vacio h3{font:600 1.1rem/1.3 var(--ui)}
 .vacio p{color:var(--muted);max-width:42ch}
 
 /* Formularios */
-.form{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:clamp(1.25rem,3.5vw,2rem);display:grid;gap:1.15rem;min-width:0;box-shadow:0 18px 36px -28px var(--shadow)}
-.form-contacto{border-top:5px solid var(--cl-azul)}
-.form-resena{border-top:5px solid var(--uy-oro)}
-.form h3{font-size:1.3rem;font-weight:720;font-stretch:110%}
+.form{position:relative;overflow:hidden;display:grid;gap:1.15rem;min-width:0;padding:calc(clamp(1.25rem,3.5vw,2rem) + 3px) clamp(1.25rem,3.5vw,2rem) clamp(1.25rem,3.5vw,2rem);background:var(--vidrio);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:16px;box-shadow:0 0 0 1px var(--anillo),0 30px 70px -40px rgba(0,0,0,.9)}
+.form::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--barra-form)}
+.form-contacto{--barra-form:linear-gradient(90deg,var(--cl-azul) 0 60%,var(--cl-rojo) 60% 100%)}
+.form-resena{--barra-form:var(--oro)}
+.form h3{font:600 1.2rem/1.3 var(--ui)}
 .campo{display:grid;gap:.4rem;min-width:0;align-content:start}
 .campo > label,.campo legend{font:600 .875rem/1.3 var(--ui);color:var(--ink);padding:0}
 .opc{font-weight:400;color:var(--muted)}
-.campo input:not([type="radio"]),.campo select,.campo textarea{width:100%;font:400 1rem/1.4 var(--ui);color:var(--ink);background:var(--field);border:1px solid var(--rule);border-radius:4px;padding:.75rem .85rem;transition:border-color .15s}
-.campo textarea{min-height:8rem;resize:vertical;line-height:1.5}
-.campo input:not([type="radio"]):focus-visible,.campo select:focus-visible,.campo textarea:focus-visible{outline:2px solid var(--azul);outline-offset:0;border-color:var(--azul)}
-.campo [aria-invalid="true"]{border-color:var(--err)}
-.error{font-size:.875rem;color:var(--err);transition:opacity 150ms var(--ease-out),transform 150ms var(--ease-out)}
 .ayuda{font-size:.875rem;color:var(--muted)}
+.campo input:not([type="radio"]),.campo select,.campo textarea{width:100%;min-height:3rem;font:400 1rem/1.4 var(--ui);color:var(--ink);background:var(--campo);border:0;border-radius:10px;padding:.75rem .95rem;box-shadow:inset 0 0 0 1px rgba(143,176,255,.5);transition:box-shadow .15s ease}
+.campo textarea{min-height:8rem;resize:vertical;line-height:1.55}
+.campo input:not([type="radio"]):focus-visible,.campo select:focus-visible,.campo textarea:focus-visible{outline:2px solid var(--azul);outline-offset:0;box-shadow:inset 0 0 0 1px var(--azul)}
+.campo [aria-invalid="true"]{box-shadow:inset 0 0 0 1.5px var(--err)}
+.error{font-size:.875rem;color:var(--err);transition:opacity 150ms var(--ease-out),transform 150ms var(--ease-out)}
 .error:empty{display:none}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 .fila{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
 @media (max-width:560px){.fila{grid-template-columns:1fr}}
 .califica{display:flex;align-items:center;flex-wrap:wrap;gap:.25rem 1rem}
-.estrellas{display:inline-flex;flex-direction:row-reverse;justify-content:flex-end}
+.estrellas{display:inline-flex;flex-wrap:wrap;flex-direction:row-reverse;justify-content:flex-end}
 .estrellas input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
-.estrellas label{display:grid;place-items:center;min-width:2.75rem;min-height:2.75rem;font-size:1.85rem;line-height:1;color:var(--estrella-vacia);cursor:pointer;transition:color 120ms ease,transform 160ms var(--ease-out)}
+.estrellas label{display:grid;place-items:center;min-width:44px;min-height:44px;font-size:30px;line-height:1;color:var(--estrella-vacia);cursor:pointer;transition:color 120ms ease,transform 160ms var(--ease-out)}
 .estrellas label:active{transform:scale(.9)}
-.estrellas input:checked ~ label{color:var(--estrella)}
-.estrellas input:focus-visible + label{outline:2px solid var(--azul);outline-offset:1px;border-radius:3px}
+.estrellas input:checked ~ label{color:var(--oro)}
+.estrellas input:focus-visible + label{outline:2px solid var(--azul);outline-offset:1px;border-radius:8px}
 .valor{font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .pie-form{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem}
 .contador{font-size:.875rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.estado{border-left:3px solid var(--azul);background:color-mix(in srgb,var(--azul) 8%,transparent);padding:.8rem .95rem;font-size:.9375rem;line-height:1.5;border-radius:0 4px 4px 0;transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
+.estado{padding:.8rem .95rem;border-radius:0 10px 10px 0;border-left:3px solid var(--azul);background:rgba(143,176,255,.1);font-size:.9375rem;line-height:1.55;overflow-wrap:anywhere;transition:opacity 200ms var(--ease-out),transform 200ms var(--ease-out)}
 @starting-style{.error,.estado{opacity:0;transform:translateY(4px)}}
 
 /* Pie */
-.pie{background:var(--sheet);color:var(--muted);border-top:1px solid var(--rule)}
+.pie{position:relative;background:var(--abismo);color:var(--muted)}
 .pie-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem;padding-block:2rem 2.5rem;font-size:.875rem}
-.logo-pie{height:4.5rem}
+.logo-pie{height:64px}
 .pie-nav{display:flex;flex-wrap:wrap;gap:0 1rem}
-.pie-nav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.25rem;color:var(--ink);font-weight:600;text-decoration:underline 1px var(--rule);text-underline-offset:.4em;transition:text-decoration-color .15s}
+.pie-nav a{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.25rem;color:var(--ink);font-weight:500;text-decoration:underline 1px rgba(143,176,255,.4);text-underline-offset:.4em;transition:text-decoration-color .15s}
 .pie-legal{display:grid;gap:.15rem;text-align:right}
 @media (max-width:640px){.pie-legal{text-align:left}}
 
+/* Movimiento: una secuencia al cargar (explicar la ruta); el resto responde a la persona */
+@keyframes entrar{from{opacity:0}}
+@keyframes revelar{from{clip-path:inset(0 100% 0 0)}}
+@keyframes aparecer-nodo{from{opacity:0;transform:scale(.9)}}
+@keyframes pulso{from{opacity:.6;transform:scale(1)}to{opacity:0;transform:scale(2.6)}}
+.globo > img{animation:entrar .5s ease backwards}
+.arco{animation:revelar .9s .35s var(--ease-in-out) backwards}
+.nodo-cl{animation:aparecer-nodo .25s .3s var(--ease-out) backwards}
+.nodo-uy{animation:aparecer-nodo .25s 1.2s var(--ease-out) backwards}
+.ping{animation:pulso 1.4s var(--ease-out) 2 backwards}
+.nodo-cl .ping{animation-delay:.55s}
+.nodo-uy .ping{animation-delay:1.45s}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .sello{animation:estampar-suave .2s ease backwards}
+  .arco,.nodo-cl,.nodo-uy{animation:entrar .3s ease backwards}
+  .ping{display:none}
   .btn:active,.nav a.nav-cta:active,.estrellas label:active{transform:none}
   @starting-style{.error,.estado{transform:none}}
 }
-@keyframes estampar-suave{from{opacity:0}}
 </style>
 </head>
 <body>
@@ -235,7 +249,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 
 <header class="top">
   <div class="wrap bar">
-    <a class="marca" href="#inicio" aria-label="SGV Importaciones, ir al inicio"><img class="logo" src="assets/logo.webp" width="360" height="294" alt="SGV Importaciones"></a>
+    <a class="marca" href="#inicio" aria-label="SGV Importaciones, ir al inicio"><img class="logo" src="assets/logo-claro.webp" width="360" height="294" alt="SGV Importaciones"></a>
     <nav class="nav" aria-label="Secciones">
       <a href="#historia">Historia</a>
       <a href="#resenas">Reseñas</a>
@@ -256,28 +270,45 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
         </div>
       </div>
 
-      <aside class="ficha" aria-label="Ficha de la empresa">
-        <div class="ficha-top"><span>Ficha de empresa</span><span>CL / UY</span></div>
-        <dl>
-          <div><dt>Empresa</dt><dd>SGV Importaciones</dd></div>
-          <div><dt>Bases</dt><dd>Chile y Uruguay</dd></div>
-          <div><dt>Actividad</dt><dd>Importación y venta de productos</dd></div>
-          <div><dt>Monedas</dt><dd>CLP, UYU y USD</dd></div>
-          <div><dt>Contacto</dt><dd><a href="#contacto">Formulario de contacto</a></dd></div>
+      <div class="globo-bloque">
+        <div class="globo">
+          <img src="assets/globe.svg" width="600" height="600" alt="" decoding="async">
+          <svg class="ruta" viewBox="0 0 600 600" fill="none" role="img" aria-label="Ruta comercial entre Santiago de Chile y Montevideo, Uruguay">
+            <defs>
+              <linearGradient id="arco-g" gradientUnits="userSpaceOnUse" x1="270.2" y1="312.5" x2="326.2" y2="319">
+                <stop offset="0" stop-color="#5E86FF"/><stop offset=".5" stop-color="#FF6050"/><stop offset="1" stop-color="#FCD116"/>
+              </linearGradient>
+            </defs>
+            <path class="arco" d="M270.2 312.5Q298.2 205 326.2 319" stroke="url(#arco-g)" stroke-width="3" stroke-linecap="round"/>
+            <g class="nodo nodo-cl">
+              <circle class="ping" cx="270.2" cy="312.5" r="9" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="270.2" cy="312.5" r="9" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="270.2" cy="312.5" r="4.2" fill="#fff"/>
+            </g>
+            <g class="nodo nodo-uy">
+              <circle class="ping" cx="326.2" cy="319" r="9" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="326.2" cy="319" r="9" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="326.2" cy="319" r="4.2" fill="#fff"/>
+            </g>
+          </svg>
+        </div>
+        <dl class="coords">
+          <div><dt><span class="punto punto-cl" aria-hidden="true"></span>Santiago, Chile</dt><dd>33°27′ S, 70°40′ O</dd></div>
+          <div><dt><span class="punto punto-uy" aria-hidden="true"></span>Montevideo, Uruguay</dt><dd>34°54′ S, 56°10′ O</dd></div>
         </dl>
-        <svg class="sello" viewBox="0 0 160 160" aria-hidden="true">
-          <defs><path id="sello-arco" d="M24,80 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs>
-          <circle cx="80" cy="80" r="75" fill="none" stroke="currentColor" stroke-width="3"/>
-          <circle cx="80" cy="80" r="69" fill="none" stroke="currentColor" stroke-width="1.2"/>
-          <circle cx="80" cy="80" r="45" fill="none" stroke="currentColor" stroke-width="1.2"/>
-          <text fill="currentColor" font-family="Archivo, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.3"><textPath href="#sello-arco">SGV IMPORTACIONES ★ CHILE ★ URUGUAY ★</textPath></text>
-          <text x="80" y="75" text-anchor="middle" fill="currentColor" font-family="Archivo, Arial, sans-serif" font-size="21" font-weight="800">CL</text>
-          <line x1="60" y1="82" x2="100" y2="82" stroke="currentColor" stroke-width="1.4"/>
-          <text x="80" y="103" text-anchor="middle" fill="currentColor" font-family="Archivo, Arial, sans-serif" font-size="21" font-weight="800">UY</text>
-        </svg>
-      </aside>
+      </div>
     </section>
   </div>
+
+  <section class="wrap datos" aria-label="Datos de la empresa">
+    <dl>
+      <div><dt>Empresa</dt><dd>SGV Importaciones</dd></div>
+      <div><dt>Bases</dt><dd>Chile y Uruguay</dd></div>
+      <div><dt>Actividad</dt><dd>Importación y venta de productos</dd></div>
+      <div><dt>Monedas</dt><dd>CLP, UYU y USD</dd></div>
+      <div><dt>Contacto</dt><dd><a href="#contacto">Formulario de contacto</a></dd></div>
+    </dl>
+  </section>
 
   <section id="historia" class="seccion" aria-labelledby="titulo-historia">
     <div class="wrap seccion-grid">
@@ -369,7 +400,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 
         <div class="pie-form">
           <span class="contador" id="rv-texto-contador">0 / 600</span>
-          <button type="submit" class="btn btn-primario">Enviar reseña</button>
+          <button type="submit" class="btn btn-oro">Enviar reseña</button>
         </div>
         <p class="estado" id="rv-estado" role="status" hidden></p>
       </form>
@@ -422,7 +453,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
         </div>
         <div class="pie-form">
           <span class="contador" id="ct-mensaje-contador">0 / 1000</span>
-          <button type="submit" class="btn btn-primario">Enviar mensaje</button>
+          <button type="submit" class="btn btn-oro">Enviar mensaje</button>
         </div>
         <p class="estado" id="ct-estado" role="status" hidden></p>
       </form>
@@ -432,7 +463,7 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 
 <footer class="pie">
   <div class="wrap pie-bar">
-    <a class="marca" href="#inicio" aria-label="SGV Importaciones, volver al inicio"><img class="logo logo-pie" src="assets/logo.webp" width="360" height="294" alt="SGV Importaciones" loading="lazy"></a>
+    <a class="marca" href="#inicio" aria-label="SGV Importaciones, volver al inicio"><img class="logo logo-pie" src="assets/logo-claro.webp" width="360" height="294" alt="SGV Importaciones" loading="lazy"></a>
     <nav class="pie-nav" aria-label="Pie de página">
       <a href="#historia">Historia</a>
       <a href="#resenas">Reseñas</a>
@@ -519,6 +550,15 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
     }, { rootMargin: '-35% 0px -55% 0px' });
     Object.keys(enlaces).forEach(function (id) { vigia.observe(document.getElementById(id)); });
   }
+
+  // Encabezado fijo solo si no ocupa demasiado alto (texto muy grande)
+  var cabecera = document.querySelector('.top');
+  function ajustarCabecera() {
+    cabecera.style.position = '';
+    if (cabecera.offsetHeight > window.innerHeight * 0.2) cabecera.style.position = 'static';
+  }
+  window.addEventListener('resize', ajustarCabecera);
+  ajustarCabecera();
 
   contador('rv-texto', 'rv-texto-contador', 600);
   contador('ct-mensaje', 'ct-mensaje-contador', 1000);

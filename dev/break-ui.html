@@ -30,14 +30,12 @@ iframe{border:0;background:#fff;height:calc(100vh - 128px);min-height:560px;max-
     <button type="button" data-v="320">320</button><button type="button" data-v="390">390</button><button type="button" data-v="768">768</button><button type="button" data-v="full">Completo</button></div></div>
   <div class="grupo"><span>Texto</span><div class="seg" data-param="text">
     <button type="button" data-v="100">100%</button><button type="button" data-v="150">150%</button><button type="button" data-v="200">200%</button></div></div>
-  <div class="grupo"><span>Tema</span><div class="seg" data-param="theme">
-    <button type="button" data-v="light">Claro</button><button type="button" data-v="dark">Oscuro</button></div></div>
 </div>
 
 <script src="break-ui.fixtures.js"></script>
 <script>
 (function () {
-  var def = { data: 'demo', w: 'full', text: '100', theme: 'light' };
+  var def = { data: 'demo', w: 'full', text: '100' };
   var q = new URLSearchParams(location.search), est = {};
   Object.keys(def).forEach(function (k) { est[k] = q.get(k) || def[k]; });
   var marco = document.getElementById('pagina');
@@ -50,7 +48,6 @@ iframe{border:0;background:#fff;height:calc(100vh - 128px);min-height:560px;max-
   function aplicarAncho() { marco.style.width = est.w === 'full' ? '100%' : est.w + 'px'; }
   function aplicarEnPagina() {
     var doc = marco.contentDocument; if (!doc || !doc.documentElement) return;
-    doc.documentElement.setAttribute('data-theme', est.theme);
     doc.documentElement.style.fontSize = est.text + '%';
     window.SGV_BREAK.aplicar(doc, est.data);
   }
