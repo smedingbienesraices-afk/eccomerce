@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Banco de pruebas | SGV Importaciones</title>
+<style>
+/* Solo desarrollo: no enlazar desde la página ni publicar. */
+*{box-sizing:border-box}
+body{margin:0;background:#E4E7EC;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#111;min-height:100vh}
+.escenario{display:flex;justify-content:center;padding:16px 16px 96px}
+iframe{border:0;background:#fff;height:calc(100vh - 128px);min-height:560px;max-width:100%;box-shadow:0 8px 30px rgba(0,0,0,.18);border-radius:6px}
+.barra{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;max-width:calc(100vw - 24px);padding:8px 10px;background:rgba(255,255,255,.96);border:1px solid #C9CED6;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.16)}
+.grupo{display:inline-flex;align-items:center;gap:6px}
+.grupo > span{color:#555;font-size:12px}
+.seg{display:inline-flex;background:#E4E7EC;border-radius:8px;padding:2px}
+.seg button{border:0;background:transparent;font:inherit;padding:6px 10px;border-radius:6px;cursor:pointer;color:#222;min-height:32px}
+.seg button[aria-pressed="true"]{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);font-weight:600}
+.seg button:focus-visible{outline:2px solid #0039A6;outline-offset:1px}
+</style>
+</head>
+<body>
+<div class="escenario"><iframe id="pagina" title="Página bajo prueba"></iframe></div>
+
+<div class="barra" role="group" aria-label="Controles de prueba">
+  <div class="grupo"><span>Datos</span><div class="seg" data-param="data">
+    <button type="button" data-v="demo">Demo</button><button type="button" data-v="worst">Peor caso</button><button type="button" data-v="empty">Vacío</button></div></div>
+  <div class="grupo"><span>Ancho</span><div class="seg" data-param="w">
+    <button type="button" data-v="320">320</button><button type="button" data-v="390">390</button><button type="button" data-v="768">768</button><button type="button" data-v="full">Completo</button></div></div>
+  <div class="grupo"><span>Texto</span><div class="seg" data-param="text">
+    <button type="button" data-v="100">100%</button><button type="button" data-v="150">150%</button><button type="button" data-v="200">200%</button></div></div>
+  <div class="grupo"><span>Tema</span><div class="seg" data-param="theme">
+    <button type="button" data-v="light">Claro</button><button type="button" data-v="dark">Oscuro</button></div></div>
+</div>
+
+<script src="break-ui.fixtures.js"></script>
+<script>
+(function () {
+  var def = { data: 'demo', w: 'full', text: '100', theme: 'light' };
+  var q = new URLSearchParams(location.search), est = {};
+  Object.keys(def).forEach(function (k) { est[k] = q.get(k) || def[k]; });
+  var marco = document.getElementById('pagina');
+
+  function pintarBotones() {
+    document.querySelectorAll('.seg').forEach(function (g) {
+      g.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.v === est[g.dataset.param])); });
+    });
+  }
+  function aplicarAncho() { marco.style.width = est.w === 'full' ? '100%' : est.w + 'px'; }
+  function aplicarEnPagina() {
+    var doc = marco.contentDocument; if (!doc || !doc.documentElement) return;
+    doc.documentElement.setAttribute('data-theme', est.theme);
+    doc.documentElement.style.fontSize = est.text + '%';
+    window.SGV_BREAK.aplicar(doc, est.data);
+  }
+  function guardarUrl() { history.replaceState(null, '', '?' + new URLSearchParams(est).toString()); }
+
+  marco.addEventListener('load', aplicarEnPagina);
+  document.querySelectorAll('.seg').forEach(function (g) {
+    g.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      var antes = est[g.dataset.param]; est[g.dataset.param] = b.dataset.v;
+      pintarBotones(); aplicarAncho(); guardarUrl();
+      if (antes !== b.dataset.v) marco.contentWindow.location.reload();   // recarga limpia y vuelve a aplicar el estado
+    });
+  });
+  pintarBotones(); aplicarAncho(); marco.src = '../index.html';
+})();
+</script>
+</body>
+</html>
